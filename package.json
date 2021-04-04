@@ -12,7 +12,7 @@
   ],
   "main": "lib/index.js",
   "scripts": {
-    "prepublish": "babel src --out-dir lib",
+    "prepare": "babel src --out-dir lib",
     "test": "mocha -c"
   },
   "author": "Tim Knip <tim@floorplanner.com> (http://www.floorplanner.com/)",
@@ -20,7 +20,8 @@
   "dependencies": {
     "canvas": "^2.0.0-alpha.9",
     "gl": "^4.0.4",
-    "pixi.js": "^4.7.0",
+    "ismobilejs": "^1.1.1",
+    "pixi.js-legacy": "^5.3.9",
     "request": "^2.83.0",
     "xhr2": "^0.1.4"
   },

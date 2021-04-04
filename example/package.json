@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "npm --prefix .. run prepare && node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "ismobilejs": "^1.1.1",
     "node-pixi": "file:.."
   }
 }

@@ -5,7 +5,7 @@ console.log(`0`)
 
 const app = new PIXI.Application({
   backgroundColor: 0x550088, 
-  forceCanvas: true
+  forceCanvas: true,
 });
 
 const g = new PIXI.Graphics();
@@ -18,6 +18,8 @@ app.render();
 
 app.view.toBuffer('jpg', 1).then(buffer => {
   fs.writeFileSync('che.jpg', buffer);
+  process.exit(0)
 }).catch(err => {
   console.error(err);
+  process.exit(990);
 });
