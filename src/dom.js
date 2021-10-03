@@ -1,10 +1,8 @@
-import fs from 'fs';
 import gl from 'gl';
 import * as canvas from 'canvas';
 import XMLHttpRequest from 'xhr2';
-import EventEmitter from 'events';
-import request from 'request';
 import * as webgl from './webgl';
+import raf from "raf";
 
 let NODE_PIXI_WEBGL = false;
 
@@ -99,12 +97,12 @@ export class Canvas extends Element {
   }
 
   getContext(value, contextOptions) {
-    if (value === 'webgl') {
+    if (value === 'webgl2' || value === 'webgl') {
       this._ctx = gl(1, 1, contextOptions);
       global.window.WebGLRenderingContext = this._ctx;
       this._webgl = true;
-      this._webglResizeExt =
-        this._ctx.getExtension('STACKGL_resize_drawingbuffer');
+      // this._webglResizeExt =
+      //   this._ctx.getExtension('STACKGL_resize_drawingbuffer');
       NODE_PIXI_WEBGL = true;
     }
     return this._ctx;
@@ -165,55 +163,15 @@ export class Canvas extends Element {
 }
 
 // monkey patch Canvas#Image
-canvas.Image.prototype._eventemitter = null;
 canvas.Image.prototype.addEventListener = function (name, cb) {
-  if (!this._eventemitter) {
-    this._eventemitter = new EventEmitter;
+  if(name==='load') {
+    this.onload = cb
+  } else if(name === 'error') {
+    this.onerror = cb
+  } else {
+    console.log(`unhandled image event: ${name}`)
   }
-  this._eventemitter.once(name, cb);
 }
-canvas.Image.prototype._src = '';
-Object.defineProperty(canvas.Image.prototype, "src", {
-  get: function src() {
-    return this._src;
-  },
-  set: function src(value) {
-    let isBuffer = value instanceof Buffer;
-
-    if (typeof value === 'string' && value.match(/^https?/)) {
-      request({
-        method: 'GET',
-        url: value,
-        encoding: null
-      }, (err, res, body) => {
-        if (err) {
-          this._eventemitter.emit('error', {
-            target: {
-              nodeName: err
-            }
-          });
-        } else {
-          this._src = value;
-          this.source = body;
-          this._eventemitter.emit('load');
-        }
-      });
-    } else if (isBuffer || typeof value === 'string') {
-      process.nextTick(() => {
-        this._src = this.source = value;
-        this._eventemitter.emit('load');
-      });
-    } else {
-      process.nextTick(() => {
-        this._eventemitter.emit('error', {
-          target: {
-            nodeName: new Error('unable to set Image#src')
-          }
-        });
-      });
-    }
-  }
-});
 
 class Document {
 
@@ -254,6 +212,7 @@ class Window {
   }
 
   addEventListener() { }
+  removeEventListener() { }
 }
 
 global.document = new Document;
@@ -262,3 +221,8 @@ global.navigator = global.window.navigator;
 global.Image = canvas.Image;
 global.XMLHttpRequest = XMLHttpRequest;
 global.Canvas = Canvas;
+global.XMLDocument = Element;
+global.HTMLVideoElement = Element;
+global.HTMLImageElement = canvas.Image;
+global.HTMLCanvasElement = Canvas;
+raf.polyfill(global)

@@ -12,6 +12,6 @@
   "type": "module",
   "dependencies": {
     "ismobilejs": "^1.1.1",
-    "node-pixi": "file:.."
+    "node-pixi": "../"
   }
 }

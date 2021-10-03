@@ -26,6 +26,7 @@ function monkey_patch_loader() {
 }
 
 //monkey_patch_loader();
+global.PIXI = PIXI;
 
 export {
   PIXI,
