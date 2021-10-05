@@ -1,13 +1,10 @@
-import gl from 'gl';
-import * as canvas from 'canvas';
-import XMLHttpRequest from 'xhr2';
-import * as webgl from './webgl';
+import * as canvas from "canvas";
+import XMLHttpRequest from "xhr2";
 import raf from "raf";
 
 let NODE_PIXI_WEBGL = false;
 
 class Element {
-
   constructor() {
     this.style = {};
     this.offsetWidth = 20;
@@ -16,11 +13,11 @@ class Element {
     this._clientHeight = 20;
   }
 
-  addEventListener() { }
+  addEventListener() {}
 
-  appendChild() { }
+  appendChild() {}
 
-  removeChild() { }
+  removeChild() {}
 
   get clientHeight() {
     return this._clientHeight;
@@ -40,11 +37,10 @@ class Element {
 }
 
 class AnchorElement extends Element {
-
   constructor() {
     super();
 
-    this._href = '';
+    this._href = "";
   }
 
   get href() {
@@ -56,11 +52,10 @@ class AnchorElement extends Element {
 }
 
 export class Canvas extends Element {
-
   static imageToImageData(image, flip_y = true) {
     if (NODE_PIXI_WEBGL) {
       let c = canvas.createCanvas(image.width, image.height),
-        ctx = c.getContext('2d');
+        ctx = c.getContext("2d");
       if (flip_y) {
         ctx.scale(1, -1);
         ctx.translate(0, -image.height);
@@ -78,7 +73,7 @@ export class Canvas extends Element {
     this._canvas = canvas.createCanvas(1, 1);
 
     //patching this stuff is necessary, see jsdom HTMLCanvasElement-impl
-    this._ctx = this._canvas.getContext('2d');
+    this._ctx = this._canvas.getContext("2d");
     this._ctx.canvas = this._canvas;
 
     let patch = (ctx, name) => {
@@ -89,21 +84,14 @@ export class Canvas extends Element {
       };
     };
 
-    patch(this._ctx, 'createPattern');
-    patch(this._ctx, 'drawImage');
+    patch(this._ctx, "createPattern");
+    patch(this._ctx, "drawImage");
 
-    this._webgl = false;
-    this._webglResizeExt = null;
   }
 
   getContext(value, contextOptions) {
-    if (value === 'webgl2' || value === 'webgl') {
-      this._ctx = gl(1, 1, contextOptions);
-      global.window.WebGLRenderingContext = this._ctx;
-      this._webgl = true;
-      // this._webglResizeExt =
-      //   this._ctx.getExtension('STACKGL_resize_drawingbuffer');
-      NODE_PIXI_WEBGL = true;
+    if (value.indexOf("webgl") != -1) {
+      return;
     }
     return this._ctx;
   }
@@ -128,24 +116,22 @@ export class Canvas extends Element {
     this._canvas.width = value;
   }
 
-  toBuffer(format = 'png', quality = 1) {
-    let c = this._webgl ?
-      webgl.to_canvas(this._ctx, this.width, this.height) :
-      this._canvas;
+  toBuffer(format = "png", quality = 1) {
+    let c = this._canvas;
 
     return new Promise((resolve, reject) => {
-      if (format === 'jpg') {
-        c.toDataURL('image/jpeg', quality, (err, data) => {
+      if (format === "jpg") {
+        c.toDataURL("image/jpeg", quality, (err, data) => {
           if (err) return reject(err);
-          data = data.replace(/^[^,]+,/, '');
-          resolve(new Buffer(data, 'base64'));
+          data = data.replace(/^[^,]+,/, "");
+          resolve(new Buffer(data, "base64"));
         });
-      } else if (format === 'png') {
+      } else if (format === "png") {
         resolve(c.toBuffer());
-      } else if (format === 'pdf' || format === 'svg') {
+      } else if (format === "pdf" || format === "svg") {
         let cnv = canvas.createCanvas(this.width, this.height, format),
-          ctx = cnv.getContext('2d'),
-          img = new canvas.Image;
+          ctx = cnv.getContext("2d"),
+          img = new canvas.Image();
 
         img.onload = () => {
           ctx.drawImage(img, 0, 0, this.width, this.height);
@@ -164,33 +150,32 @@ export class Canvas extends Element {
 
 // monkey patch Canvas#Image
 canvas.Image.prototype.addEventListener = function (name, cb) {
-  if(name==='load') {
-    this.onload = cb
-  } else if(name === 'error') {
-    this.onerror = cb
+  if (name === "load") {
+    this.onload = cb;
+  } else if (name === "error") {
+    this.onerror = cb;
   } else {
-    console.log(`unhandled image event: ${name}`)
+    console.log(`unhandled image event: ${name}`);
   }
-}
+};
 
 class Document {
-
   constructor() {
-    this.body = new Element;
+    this.body = new Element();
     this.documentElement = this.body;
   }
 
-  addEventListener() { }
-  appendChild(child) { }
-  removeChild(child) { }
+  addEventListener() {}
+  appendChild(child) {}
+  removeChild(child) {}
 
   createElement(tag) {
     switch (tag) {
-      case 'canvas':
+      case "canvas":
         return new Canvas();
-      case 'div':
+      case "div":
         return new Element();
-      case 'a':
+      case "a":
         return new AnchorElement();
       default:
         throw new Error(`Document::createElement: unhandled "${tag}"`);
@@ -199,23 +184,22 @@ class Document {
 }
 
 class Window {
-
   constructor(document) {
     this.document = document;
     this.navigator = {
-      userAgent: 'node-pixi',
-      appVersion: '0.3.3'
+      userAgent: "node-pixi",
+      appVersion: "0.3.3",
     };
     this.location = "http://localhost/";
     this.Image = canvas.Image;
-    this.WebGLRenderingContext = {};
+    // this.WebGLRenderingContext = {};
   }
 
-  addEventListener() { }
-  removeEventListener() { }
+  addEventListener() {}
+  removeEventListener() {}
 }
 
-global.document = new Document;
+global.document = new Document();
 global.window = new Window(global.document);
 global.navigator = global.window.navigator;
 global.Image = canvas.Image;
@@ -225,4 +209,7 @@ global.XMLDocument = Element;
 global.HTMLVideoElement = Element;
 global.HTMLImageElement = canvas.Image;
 global.HTMLCanvasElement = Canvas;
-raf.polyfill(global)
+raf.polyfill(global);
+global.addEventListener = function () {};
+global.removeEventListener = function () {};
+global.self = global.window;
