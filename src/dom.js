@@ -15,6 +15,8 @@ class Element {
 
   addEventListener() {}
 
+  removeEventListener() {}
+
   appendChild() {}
 
   removeChild() {}
@@ -154,8 +156,6 @@ canvas.Image.prototype.addEventListener = function (name, cb) {
     this.onload = cb;
   } else if (name === "error") {
     this.onerror = cb;
-  } else {
-    console.log(`unhandled image event: ${name}`);
   }
 };
 
@@ -166,6 +166,7 @@ class Document {
   }
 
   addEventListener() {}
+  removeEventListener() {}
   appendChild(child) {}
   removeChild(child) {}
 

@@ -1,11 +1,11 @@
 import "node-pixi";
-import "./spine-debug";
+import "./middleware";
 import fs from "fs";
-import { Spine } from "pixi-spine";
 import { Application } from "@pixi/app";
+import { Spine } from "pixi-spine";
 import { SpineDebug } from "./spine-debug";
 
-let spineDebug;
+let spineDebug: SpineDebug;
 const oldUpadte = Spine.prototype.update;
 Spine.prototype.update = function (dt) {
   oldUpadte.call(this, dt);
@@ -26,21 +26,25 @@ const setupPixi = () => {
       // backgroundColor: 0xFFFFFF
     });
 
-    // app.loader.baseUrl =
-    //   "https://storage.googleapis.com/assets.axieinfinity.com/";
+    app.loader.baseUrl =
+      "https://storage.googleapis.com/assets.axieinfinity.com/";
     app.loader.onError.add(reject);
-    app.loader.add("axie", "https://storage.googleapis.com/game-assets-test/dracoo/12/huolong.json").load(onAssetsLoaded);
-    function onAssetsLoaded(loader: any, res: any) {
+    app.loader
+      .add(
+        "spine",
+        // "https://storage.googleapis.com/game-assets-test/dracoo/12/huolong.json"
+        "axies/5985687/axie/axie.json"
+      )
+      .load(onAssetsLoaded);
+    function onAssetsLoaded(_: any, res: any) {
       try {
-        console.log("assets loaded");
-        // create a spine boy
-        const axie = new Spine(res.axie.spineData);
-        // spineDebug = new SpineDebug(axie);
+        const spine = new Spine(res.spine.spineData);
+        // spineDebug = new SpineDebug(spine);
         // set the position
-        axie.scale.set(0.5);
-        axie.x = app.screen.width / 2;
-        axie.y = app.screen.height / 2 + axie.height / 2;
-        app.stage.addChild(axie);
+        spine.scale.set(0.5);
+        spine.x = app.screen.width / 2;
+        spine.y = app.screen.height / 2 + spine.height / 2;
+        app.stage.addChild(spine);
         resolve(app);
       } catch (error) {
         reject(error);
@@ -53,7 +57,8 @@ const main = async () => {
   const app = await setupPixi();
   const buffer = await takeScreenShot(app);
   fs.writeFileSync("axie.png", buffer);
+  app.destroy(true, true);
   return 0;
 };
 
-main().catch(console.log).finally(process.exit);
+main().catch(console.log);

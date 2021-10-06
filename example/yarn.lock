@@ -14,6 +14,50 @@
   dependencies:
     "@cspotcode/source-map-consumer" "0.8.0"
 
+"@pixi-spine/base@~3.0.13":
+  version "3.0.13"
+  resolved "https://registry.yarnpkg.com/@pixi-spine/base/-/base-3.0.13.tgz#8763c3fddc4acb4e53f306dfd05b34dd071dafdd"
+  integrity sha512-JKgK+nw81/UwoRS5YBZhU5nIHsYGO5u3HY2QsKRJjvgz2EBLYKNhQ8KpVmx8C9CV9VnmectIjKlHkMFDiP3/Dg==
+
+"@pixi-spine/loader-base@~3.0.13":
+  version "3.0.13"
+  resolved "https://registry.yarnpkg.com/@pixi-spine/loader-base/-/loader-base-3.0.13.tgz#4114b82b985c79a751d2eaec8e57e18bd125a913"
+  integrity sha512-3sSWMgCRzZ0fTSx5rGMWlqYe83dCiCQ/zWOay/pbFElYywaCN06+5g0NDRyPypMwlfMjjlq2VQ2RNBgI7RtDYw==
+  dependencies:
+    "@pixi-spine/base" "~3.0.13"
+
+"@pixi-spine/loader-uni@~3.0.13":
+  version "3.0.13"
+  resolved "https://registry.yarnpkg.com/@pixi-spine/loader-uni/-/loader-uni-3.0.13.tgz#568f8c1b1953ee54e9c47e78422fa0f1530ecf95"
+  integrity sha512-iUEAn6F1mPOzIuc3eDXKa/+lX5ZPFI5e9hS08yggLWimrfgOTMSenLsg5eC0EokMfQwjsMeVGWz2Bst4LeHxuA==
+  dependencies:
+    "@pixi-spine/base" "~3.0.13"
+    "@pixi-spine/loader-base" "~3.0.13"
+    "@pixi-spine/runtime-3.7" "~3.0.13"
+    "@pixi-spine/runtime-3.8" "~3.0.13"
+    "@pixi-spine/runtime-4.0" "~3.0.13"
+
+"@pixi-spine/runtime-3.7@~3.0.13":
+  version "3.0.13"
+  resolved "https://registry.yarnpkg.com/@pixi-spine/runtime-3.7/-/runtime-3.7-3.0.13.tgz#a9ddf66b4b54f0c6cf91f7c303afde8fa7d2f021"
+  integrity sha512-EoXz4997WPpqttNEmyCaFzY2lsv15QXahEfF5+EueLJaqcW6uiLzK8z7zWUA5FJ3UTeb3B9tvpT7IibLD/dltw==
+  dependencies:
+    "@pixi-spine/base" "~3.0.13"
+
+"@pixi-spine/runtime-3.8@~3.0.13":
+  version "3.0.13"
+  resolved "https://registry.yarnpkg.com/@pixi-spine/runtime-3.8/-/runtime-3.8-3.0.13.tgz#c7b96137a68af6ebe3df7b9f4847f254a41f7ec5"
+  integrity sha512-Ve8WCqwMg4FzpUEO0kMlf0IuKum96pxLQi1Kv8J1fIGqtzsJUrpS3eAUfWo9CMdWT8YPOOGkMdjKl7ZE5ZLJHA==
+  dependencies:
+    "@pixi-spine/base" "~3.0.13"
+
+"@pixi-spine/runtime-4.0@~3.0.13":
+  version "3.0.13"
+  resolved "https://registry.yarnpkg.com/@pixi-spine/runtime-4.0/-/runtime-4.0-3.0.13.tgz#55d63a67ef15b5c90f1710d4a527da2471e9e1d9"
+  integrity sha512-KUihDa4D8m3YS/OEUJjoQpReNUrmgnjCSGoPuoNB5bzKgGSDENSmra9gDaT4CuyDkvnM6Q29MTx2PirUM1N/LQ==
+  dependencies:
+    "@pixi-spine/base" "~3.0.13"
+
 "@tsconfig/node10@^1.0.7":
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/@tsconfig/node10/-/node10-1.0.8.tgz#c1e4e80d6f964fbecb3359c43bd48b40f7cadad9"
@@ -34,10 +78,10 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.2.tgz#423c77877d0569db20e1fc80885ac4118314010e"
   integrity sha512-eZxlbI8GZscaGS7kkc/trHTT5xgrjH3/1n2JDwusC9iahPKWMRvRjJSAN5mCXviuTGQ/lHnhvv8Q1YTpnfz9gA==
 
-"@types/node@^16.10.2":
-  version "16.10.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.10.2.tgz#5764ca9aa94470adb4e1185fe2e9f19458992b2e"
-  integrity sha512-zCclL4/rx+W5SQTzFs9wyvvyCwoK9QtBpratqz2IYJ3O8Umrn0m3nsTv0wQBk9sRGpvUe9CwPDrQFB10f1FIjQ==
+"@types/node@^16.10.3":
+  version "16.10.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.10.3.tgz#7a8f2838603ea314d1d22bb3171d899e15c57bd5"
+  integrity sha512-ho3Ruq+fFnBrZhUYI46n/bV2GjwzSkwuT4dTf0GkuNFmnb8nq4ny2z9JEVemFi6bdEJanHLlYfy9c6FN9B9McQ==
 
 acorn-walk@^8.1.1:
   version "8.2.0"
@@ -64,15 +108,22 @@ diff@^4.0.1:
   resolved "https://registry.yarnpkg.com/diff/-/diff-4.0.2.tgz#60f3aecb89d5fae520c11aa19efc2bb982aade7d"
   integrity sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==
 
-ismobilejs@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/ismobilejs/-/ismobilejs-1.1.1.tgz"
-  integrity sha512-VaFW53yt8QO61k2WJui0dHf4SlL8lxBofUuUmwBo0ljPk0Drz2TiuDW4jo3wDcv41qy/SxrJ+VAzJ/qYqsmzRw==
-
 make-error@^1.1.1:
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/make-error/-/make-error-1.3.6.tgz#2eb2e37ea9b67c4891f684a1394799af484cf7a2"
   integrity sha512-s8UhlNe7vPKomQhC1qFelMokr/Sc3AgNbso3n74mVPA5LTZwkB9NlXf4XPamLxJE8h0gh73rM94xvwRT2CVInw==
+
+pixi-spine@^3.0.13:
+  version "3.0.13"
+  resolved "https://registry.yarnpkg.com/pixi-spine/-/pixi-spine-3.0.13.tgz#9d01ccbab6a83d9f71d03922470638e996f424b2"
+  integrity sha512-OvnkRV1VlNroaoYdIY+srcYfnJLl0v1y616eZNqv4fpt1WF2iTeC63MhIjA/GlLy3FLFghQF4isVq2baJ0IL9w==
+  dependencies:
+    "@pixi-spine/base" "~3.0.13"
+    "@pixi-spine/loader-base" "~3.0.13"
+    "@pixi-spine/loader-uni" "~3.0.13"
+    "@pixi-spine/runtime-3.7" "~3.0.13"
+    "@pixi-spine/runtime-3.8" "~3.0.13"
+    "@pixi-spine/runtime-4.0" "~3.0.13"
 
 ts-node@^10.2.1:
   version "10.2.1"
