@@ -1,6 +1,6 @@
 {
-  "name": "node-pixi",
-  "version": "0.4.5",
+  "name": "@cc/node-pixi",
+  "version": "0.4.6",
   "description": "server side pixi.js",
   "keywords": [
     "pixi",
@@ -11,8 +11,12 @@
     "node"
   ],
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
   "scripts": {
-    "prepare": "babel src --out-dir lib -w",
+    "prepare": "babel src --out-dir lib",
     "test": "mocha -c"
   },
   "author": "Tim Knip <tim@floorplanner.com> (http://www.floorplanner.com/)",
