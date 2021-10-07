@@ -33,7 +33,7 @@ const setupPixi = () => {
       .add(
         "spine",
         // "https://storage.googleapis.com/game-assets-test/dracoo/12/huolong.json"
-        "axies/5985687/axie/axie.json"
+        "axies/3229857/axie/axie.json"
       )
       .load(onAssetsLoaded);
     function onAssetsLoaded(_: any, res: any) {
@@ -41,9 +41,10 @@ const setupPixi = () => {
         const spine = new Spine(res.spine.spineData);
         // spineDebug = new SpineDebug(spine);
         // set the position
-        spine.scale.set(0.5);
+        // spine.scale.set(0.5);
         spine.x = app.screen.width / 2;
         spine.y = app.screen.height / 2 + spine.height / 2;
+        spine.state.setAnimation(0, 'action/idle', true)
         app.stage.addChild(spine);
         resolve(app);
       } catch (error) {
