@@ -88,7 +88,6 @@ export class Canvas extends Element {
 
     patch(this._ctx, "createPattern");
     patch(this._ctx, "drawImage");
-
   }
 
   getContext(value, contextOptions) {
@@ -193,7 +192,6 @@ class Window {
     };
     this.location = "http://localhost/";
     this.Image = canvas.Image;
-    // this.WebGLRenderingContext = {};
   }
 
   addEventListener() {}
@@ -214,3 +212,10 @@ raf.polyfill(global);
 global.addEventListener = function () {};
 global.removeEventListener = function () {};
 global.self = global.window;
+
+const ____nowOffset = Date.now();
+global.performance = {
+  now: function () {
+    return Date.now() - ____nowOffset;
+  },
+};

@@ -1,5 +1,5 @@
 import "node-pixi";
-import "./middleware";
+// import "./middleware";
 import fs from "fs";
 import { Application } from "@pixi/app";
 import { Spine } from "pixi-spine";
