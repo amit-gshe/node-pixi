@@ -208,6 +208,7 @@ global.XMLDocument = Element;
 global.HTMLVideoElement = Element;
 global.HTMLImageElement = canvas.Image;
 global.HTMLCanvasElement = Canvas;
+global.CanvasRenderingContext2D = Element
 raf.polyfill(global);
 global.addEventListener = function () {};
 global.removeEventListener = function () {};
