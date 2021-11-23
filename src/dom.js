@@ -173,12 +173,10 @@ class Document {
     switch (tag) {
       case "canvas":
         return new Canvas();
-      case "div":
-        return new Element();
       case "a":
         return new AnchorElement();
       default:
-        console.warn(`Document::createElement: unhandled "${tag}"`);
+        return new Element();
     }
   }
 }
