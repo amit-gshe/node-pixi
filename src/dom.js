@@ -178,7 +178,7 @@ class Document {
       case "a":
         return new AnchorElement();
       default:
-        throw new Error(`Document::createElement: unhandled "${tag}"`);
+        console.warn(`Document::createElement: unhandled "${tag}"`);
     }
   }
 }
