@@ -9,6 +9,7 @@ Loader.registerPlugin({
   use: (resource, next) => {
     if (
       resource.extension === "json" &&
+      resource.data &&
       resource.data.bones &&
       !resource.data.skeleton
     ) {
