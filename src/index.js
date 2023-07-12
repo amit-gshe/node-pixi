@@ -1,6 +1,10 @@
 import "./dom";
-import * as PIXI from "pixi.js-legacy";
-import { Loader } from "pixi.js";
+import 'pixi-spine'
+import * as PIXI from "pixi.js-legacy"
+import { Loader } from "pixi.js-legacy";
+import { EventEmitter } from "events";
+export { Spine } from "pixi-spine";
+export { Application } from "pixi.js-legacy";
 
 /**
  * handle the spine version info lost
@@ -20,5 +24,6 @@ Loader.registerPlugin({
   },
 });
 global.PIXI = PIXI;
+global.pixi_events = new EventEmitter();
 
 export { PIXI };

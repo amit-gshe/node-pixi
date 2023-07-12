@@ -190,6 +190,7 @@ class Window {
     };
     this.location = "http://localhost/";
     this.Image = canvas.Image;
+    this.setTimeout = setTimeout
   }
 
   addEventListener() {}

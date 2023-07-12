@@ -1,6 +1,6 @@
 {
   "name": "@cc/node-pixi",
-  "version": "0.4.13",
+  "version": "0.4.15",
   "description": "server side pixi.js",
   "keywords": [
     "pixi",
@@ -16,14 +16,15 @@
     "lib"
   ],
   "scripts": {
-    "prepare": "babel src --out-dir lib",
+    "build": "babel src --out-dir lib",
     "test": "mocha -c"
   },
   "author": "Tim Knip <tim@floorplanner.com> (http://www.floorplanner.com/)",
   "license": "MIT",
   "dependencies": {
-    "canvas": "^2.8.0",
-    "pixi.js-legacy": "^6.1.3",
+    "canvas": "^2.11.2",
+    "pixi-spine": "3",
+    "pixi.js-legacy": "6.4",
     "raf": "^3.4.1",
     "xhr2": "^0.2.1"
   },
